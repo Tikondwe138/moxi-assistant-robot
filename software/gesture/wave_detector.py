@@ -1,4 +1,5 @@
 import cv2
+<<<<<<< HEAD
 import mediapipe as mp
 import time
 import sys
@@ -75,11 +76,26 @@ def detect_gesture(duration: int = 3) -> str:
         
     sensitivity = config.GESTURE_SENSITIVITY if config and hasattr(config, 'GESTURE_SENSITIVITY') else 0.8
     
+=======
+import time
+
+def detect_wave(duration: int = 5) -> bool:
+    """
+    Detect human waving using camera input by analyzing motion within the frame.
+    
+    Args:
+        duration (int): How long to watch for a wave in seconds.
+        
+    Returns:
+        bool: True if a wave gesture is detected, False otherwise.
+    """
+>>>>>>> a7f7ddf (VERSION 02)
     # Open the default camera feed
     cap = cv2.VideoCapture(0)
     
     if not cap.isOpened():
         print("Error: Could not open camera for gesture detection.")
+<<<<<<< HEAD
         return "none"
         
     detected_gesture = "none"
@@ -120,3 +136,64 @@ def detect_gesture(duration: int = 3) -> str:
         cap.release()
         
     return detected_gesture
+=======
+        return False
+        
+    # Read the first frame and convert to grayscale
+    ret, frame1 = cap.read()
+    if not ret:
+        cap.release()
+        return False
+        
+    gray1 = cv2.cvtColor(frame1, cv2.COLOR_BGR2GRAY)
+    gray1 = cv2.GaussianBlur(gray1, (21, 21), 0)
+    
+    motion_detected = False
+    start_time = time.time()
+    motion_count = 0
+    
+    print("Watching for a wave...")
+    try:
+        while time.time() - start_time < duration:
+            # Read the next frame
+            ret, frame2 = cap.read()
+            if not ret:
+                break
+                
+            gray2 = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
+            gray2 = cv2.GaussianBlur(gray2, (21, 21), 0)
+            
+            # Compute the absolute difference between the current and previous frame
+            diff = cv2.absdiff(gray1, gray2)
+            
+            # Threshold the difference image
+            thresh = cv2.threshold(diff, 25, 255, cv2.THRESH_BINARY)[1]
+            thresh = cv2.dilate(thresh, None, iterations=2)
+            
+            # Find contours maps to the regions of motion
+            contours, _ = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            
+            for contour in contours:
+                # Ignore small movements
+                if cv2.contourArea(contour) < 5000:
+                    continue
+                motion_count += 1
+                
+            # If we sequence enough fast changing frames, consider it a wave
+            if motion_count > 10:
+                motion_detected = True
+                print("Wave gesture detected!")
+                break
+                
+            # Advance frame
+            gray1 = gray2
+            
+            # Optional: Allow slight delay to reduce CPU blast
+            time.sleep(0.05)
+            
+    finally:
+        # Make sure we always release the camera
+        cap.release()
+        
+    return motion_detected
+>>>>>>> a7f7ddf (VERSION 02)
