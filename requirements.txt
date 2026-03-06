@@ -4,3 +4,7 @@ requests
 pyserial
 pyaudio
 opencv-python
+mediapipe
+Flask
+spacy
+pandas

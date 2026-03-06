@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOXI Dashboard</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h1 { color: #2c3e50; }
+        .status-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .stat-box { background: #e8ecef; padding: 15px; border-radius: 6px; text-align: center; }
+        .stat-value { font-size: 1.2em; font-weight: bold; color: #007bff; margin-top: 5px; }
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        button { background: #007bff; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MOXI Control Dashboard</h1>
+        
+        <div class="card">
+            <h2>System Status</h2>
+            <div class="status-grid">
+                <div class="stat-box">
+                    <div>MOXI Status</div>
+                    <div class="stat-value" id="sys-status">{{ state.status }}</div>
+                </div>
+                <div class="stat-box">
+                    <div>Inventory API</div>
+                    <div class="stat-value" id="api-status">{{ state.inventory_api_status }}</div>
+                </div>
+                <div class="stat-box">
+                    <div>Last Voice Command</div>
+                    <div class="stat-value" id="last-cmd">{{ state.last_command }}</div>
+                </div>
+                <div class="stat-box">
+                    <div>Last Gesture Detected</div>
+                    <div class="stat-value" id="last-gest">{{ state.last_gesture_detected }}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Manual Overrides (REST API)</h2>
+            <div class="btn-group">
+                <button onclick="triggerGesture('WAVE')">Trigger Wave</button>
+                <button onclick="triggerGesture('THUMBSUP')">Trigger Thumbs Up</button>
+                <button onclick="triggerGesture('POINT')">Trigger Point</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Simple auto-refresh to pull new state variables every 5 seconds
+        setInterval(() => window.location.reload(), 5000);
+        
+        function triggerGesture(gesture) {
+            fetch('/api/trigger_gesture', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ gesture: gesture })
+            }).then(response => {
+                if (response.ok) alert("Command sent successfully!");
+                else alert("Failed to send command.");
+            });
+        }
+    </script>
+</body>
+</html>
