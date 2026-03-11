@@ -1,0 +1,13 @@
+2026-03-12 00:34:20,510 - inventory_api - DEBUG - Querying 'PLA filament' (Attempt 1/3)
+2026-03-12 00:34:23,239 - inventory_api - WARNING - Inventory API error on 'PLA filament': HTTPSConnectionPool(host='studio-website', port=443): Max retries exceeded with url: /api/inventory?item=PLA+filament (Caused by NameResolutionError("HTTPSConnection(host='studio-website', port=443): Failed to resolve 'studio-website' ([Errno 11001] getaddrinfo failed)"))
+2026-03-12 00:34:24,246 - inventory_api - DEBUG - Querying 'PLA filament' (Attempt 2/3)
+2026-03-12 00:34:26,530 - inventory_api - WARNING - Inventory API error on 'PLA filament': HTTPSConnectionPool(host='studio-website', port=443): Max retries exceeded with url: /api/inventory?item=PLA+filament (Caused by NameResolutionError("HTTPSConnection(host='studio-website', port=443): Failed to resolve 'studio-website' ([Errno 11001] getaddrinfo failed)"))
+2026-03-12 00:34:27,532 - inventory_api - DEBUG - Querying 'PLA filament' (Attempt 3/3)
+2026-03-12 00:34:29,806 - inventory_api - WARNING - Inventory API error on 'PLA filament': HTTPSConnectionPool(host='studio-website', port=443): Max retries exceeded with url: /api/inventory?item=PLA+filament (Caused by NameResolutionError("HTTPSConnection(host='studio-website', port=443): Failed to resolve 'studio-website' ([Errno 11001] getaddrinfo failed)"))
+2026-03-12 00:35:23,847 - main_core - INFO - Starting MOXI Core Engine v2.0
+2026-03-12 00:36:24,687 - main_core - INFO - Executing intent: greeting with entities: []
+2026-03-12 00:36:32,493 - arm_controller - ERROR - Error opening serial port: could not open port '/dev/ttyUSB0': FileNotFoundError(2, 'The system cannot find the path specified.', None, 3)
+2026-03-12 00:36:32,493 - arm_controller - INFO - Queued gesture: WAVE
+2026-03-12 00:36:32,595 - arm_controller - INFO - SIMULATION: Sending command: WAVE
+2026-03-12 00:37:03,547 - main_core - INFO - Executing intent: unknown with entities: []
+2026-03-12 00:37:15,203 - main_core - INFO - Executing intent: unknown with entities: []
