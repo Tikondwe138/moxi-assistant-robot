@@ -20,6 +20,18 @@ def speak(text: str):
     # Initialize the pyttsx3 engine
     engine = pyttsx3.init()
     
+    # Try to select a female voice
+    voices = engine.getProperty('voices')
+    for voice in voices:
+        # Check standard properties like 'gender' if available
+        if getattr(voice, 'gender', None) == 'female':
+            engine.setProperty('voice', voice.id)
+            break
+        # Heuristic check on voice ID for typical female voices (e.g., Zira on Windows)
+        if 'female' in voice.name.lower() or 'zira' in voice.name.lower() or 'hazel' in voice.name.lower():
+            engine.setProperty('voice', voice.id)
+            break
+    
     # Apply configuration settings if they are available
     if config:
         if hasattr(config, 'VOICE_RATE'):

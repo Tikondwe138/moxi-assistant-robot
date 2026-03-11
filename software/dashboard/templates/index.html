@@ -15,40 +15,83 @@
         .btn-group { display: flex; gap: 10px; margin-top: 15px; }
         button { background: #007bff; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
         button:hover { background: #0056b3; }
+        .dashboard-layout { display: flex; gap: 20px; flex-wrap: wrap; }
+        .main-column { flex: 2; min-width: 400px; }
+        .side-column { flex: 1; min-width: 300px; }
+        .camera-feed { width: 100%; border-radius: 8px; border: 2px solid #ddd; background: #000; min-height: 240px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .camera-feed img { width: 100%; height: auto; display: block; }
+        .commands-list { list-style-type: none; padding: 0; margin: 0; }
+        .commands-list li { background: #e8ecef; padding: 10px; margin-bottom: 8px; border-radius: 4px; font-weight: 500; }
+        .commands-list li span.hint { font-weight: normal; color: #666; font-size: 0.9em; display: block; margin-top: 2px; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>MOXI Control Dashboard</h1>
         
-        <div class="card">
-            <h2>System Status</h2>
-            <div class="status-grid">
-                <div class="stat-box">
-                    <div>MOXI Status</div>
-                    <div class="stat-value" id="sys-status">{{ state.status }}</div>
+        <div class="dashboard-layout">
+            <div class="main-column">
+                <div class="card">
+                    <h2>System Status</h2>
+                    <div class="status-grid">
+                        <div class="stat-box">
+                            <div>MOXI Status</div>
+                            <div class="stat-value" id="sys-status">{{ state.status }}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div>Inventory API</div>
+                            <div class="stat-value" id="api-status">{{ state.inventory_api_status }}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div>Last Voice Command</div>
+                            <div class="stat-value" id="last-cmd">{{ state.last_command }}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div>Last Gesture Detected</div>
+                            <div class="stat-value" id="last-gest">{{ state.last_gesture_detected }}</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-box">
-                    <div>Inventory API</div>
-                    <div class="stat-value" id="api-status">{{ state.inventory_api_status }}</div>
+                
+                <div class="card">
+                    <h2>Live Camera Feed</h2>
+                    <div class="camera-feed">
+                        <img src="{{ url_for('video_feed') }}" alt="Camera Feed" onerror="this.onerror=null; this.parentElement.innerHTML='Camera feed offline or unavailable.'; this.parentElement.style.color='white';">
+                    </div>
                 </div>
-                <div class="stat-box">
-                    <div>Last Voice Command</div>
-                    <div class="stat-value" id="last-cmd">{{ state.last_command }}</div>
-                </div>
-                <div class="stat-box">
-                    <div>Last Gesture Detected</div>
-                    <div class="stat-value" id="last-gest">{{ state.last_gesture_detected }}</div>
+                
+                <div class="card">
+                    <h2>Manual Overrides (REST API)</h2>
+                    <div class="btn-group">
+                        <button onclick="triggerGesture('WAVE')">Trigger Wave</button>
+                        <button onclick="triggerGesture('THUMBSUP')">Trigger Thumbs Up</button>
+                        <button onclick="triggerGesture('POINT')">Trigger Point</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="card">
-            <h2>Manual Overrides (REST API)</h2>
-            <div class="btn-group">
-                <button onclick="triggerGesture('WAVE')">Trigger Wave</button>
-                <button onclick="triggerGesture('THUMBSUP')">Trigger Thumbs Up</button>
-                <button onclick="triggerGesture('POINT')">Trigger Point</button>
+            
+            <div class="side-column">
+                <div class="card">
+                    <h2>Voice Commands</h2>
+                    <p>You can chat with MOXI using the following commands:</p>
+                    <ul class="commands-list">
+                        <li>"Hello" or "Hi Moxi"
+                            <span class="hint">Greets the assistant and triggers a wave.</span>
+                        </li>
+                        <li>"Find contact [Name]"
+                            <span class="hint">e.g., "Find contact John". Looks up phone number.</span>
+                        </li>
+                        <li>"Check inventory for [Item]"
+                            <span class="hint">e.g., "Check inventory for Arduino". Checks stock availability.</span>
+                        </li>
+                        <li>"Execute [gesture] gesture"
+                            <span class="hint">e.g., "Execute point gesture". Triggers robot action.</span>
+                        </li>
+                        <li>"Exit" or "Shut down"
+                            <span class="hint">Safely shuts down the MOXI system.</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

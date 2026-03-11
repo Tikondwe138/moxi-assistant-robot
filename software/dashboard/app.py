@@ -11,7 +11,19 @@ try:
     from robot_control.arm_controller import trigger_gesture
 except ImportError:
     config = None
+    config = None
     trigger_gesture = lambda x: print(f"Mock Dashboard Trigger: {x}")
+
+# Initialize camera feed
+try:
+    import cv2
+    camera = cv2.VideoCapture(0)
+    if not camera.isOpened():
+        print("Warning: Could not open camera for dashboard.")
+        camera = None
+except ImportError:
+    print("Warning: cv2 not found, camera feed will be unavailable.")
+    camera = None
     
 app = Flask(__name__)
 
@@ -30,6 +42,29 @@ def update_state(key: str, value: str):
 @app.route("/")
 def index():
     return render_template('index.html', state=dashboard_state)
+
+def generate_frames():
+    """Generator function to yield camera frames as a continuous stream."""
+    while camera and camera.isOpened():
+        success, frame = camera.read()
+        if not success:
+            break
+        else:
+            # Encode frame to JPEG
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame = buffer.tobytes()
+            # Yield multipart stream using MJPEG format
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+@app.route('/video_feed')
+def video_feed():
+    """Video streaming route. Put this in the src attribute of an img tag."""
+    from flask import Response
+    if camera:
+        return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    else:
+        return "Camera feed not available", 404
 
 @app.route("/api/trigger_gesture", methods=['POST'])
 def api_trigger_gesture():
