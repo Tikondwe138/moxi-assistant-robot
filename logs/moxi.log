@@ -20,3 +20,33 @@
 2026-03-12 00:54:55,859 - arm_controller - INFO - SIMULATION: Sending command: WAVE
 2026-03-12 01:02:16,277 - arm_controller - INFO - Queued gesture: WAVE
 2026-03-12 01:02:16,279 - arm_controller - INFO - SIMULATION: Sending command: WAVE
+2026-03-12 01:15:09,316 - main_core - INFO - Starting MOXI Core Engine v2.0
+2026-03-12 01:15:28,486 - main_core - INFO - Executing intent: unknown with entities: []
+2026-03-12 01:15:30,305 - main_core - INFO - Executing intent: unknown with entities: []
+2026-03-12 01:15:43,873 - main_core - INFO - Executing intent: exit with entities: []
+2026-03-12 01:15:51,357 - arm_controller - ERROR - Error opening serial port: could not open port '/dev/ttyUSB0': FileNotFoundError(2, 'The system cannot find the path specified.', None, 3)
+2026-03-12 01:15:51,462 - main_core - INFO - MOXI Core Terminated
+2026-03-12 01:21:03,894 - arm_controller - INFO - Queued gesture: WAVE
+2026-03-12 01:21:03,926 - arm_controller - INFO - SIMULATION: Sending command: WAVE
+2026-03-12 01:22:48,968 - arm_controller - INFO - Queued gesture: WAVE
+2026-03-12 01:22:49,045 - arm_controller - INFO - SIMULATION: Sending command: WAVE
+2026-03-12 01:33:56,382 - main_core - INFO - Executing intent: unknown with entities: []
+2026-03-12 01:38:13,453 - main_core - INFO - Executing intent: unknown with entities: []
+2026-03-12 01:39:36,941 - main_core - INFO - Starting MOXI Core Engine v2.0
+2026-03-12 01:44:38,396 - arm_controller - ERROR - Error opening serial port: could not open port '/dev/ttyUSB0': FileNotFoundError(2, 'The system cannot find the path specified.', None, 3)
+2026-03-12 01:44:38,407 - arm_controller - INFO - Queued gesture: WAVE
+2026-03-12 01:44:38,507 - arm_controller - INFO - SIMULATION: Sending command: WAVE
+2026-03-12 01:45:26,145 - arm_controller - INFO - Queued gesture: POINT
+2026-03-12 01:45:26,244 - arm_controller - INFO - SIMULATION: Sending command: POINT
+2026-03-12 01:45:38,954 - arm_controller - INFO - Queued gesture: THUMBSUP
+2026-03-12 01:45:38,995 - arm_controller - INFO - SIMULATION: Sending command: THUMBSUP
+2026-03-12 01:46:44,980 - main_core - INFO - Executing intent: gesture_command with entities: ['wave']
+2026-03-12 01:47:01,134 - arm_controller - INFO - Queued gesture: WAVE
+2026-03-12 01:47:01,207 - arm_controller - INFO - SIMULATION: Sending command: WAVE
+2026-03-12 01:47:21,633 - main_core - INFO - Executing intent: gesture_command with entities: ['wave']
+2026-03-12 01:47:24,514 - arm_controller - INFO - Queued gesture: WAVE
+2026-03-12 01:47:24,605 - arm_controller - INFO - SIMULATION: Sending command: WAVE
+2026-03-12 01:47:35,589 - arm_controller - INFO - Queued gesture: WAVE
+2026-03-12 01:47:35,625 - arm_controller - INFO - SIMULATION: Sending command: WAVE
+2026-03-12 01:49:14,985 - main_core - INFO - Executing intent: unknown with entities: []
+2026-03-12 01:56:58,441 - main_core - INFO - Executing intent: unknown with entities: []

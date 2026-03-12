@@ -20,17 +20,28 @@ def speak(text: str):
     # Initialize the pyttsx3 engine
     engine = pyttsx3.init()
     
-    # Try to select a female voice
+    # Try to select a female voice strictly
     voices = engine.getProperty('voices')
+    voice_set = False
+    
+    # Pass 1: Look for explicit 'female' gender
     for voice in voices:
-        # Check standard properties like 'gender' if available
         if getattr(voice, 'gender', None) == 'female':
             engine.setProperty('voice', voice.id)
+            voice_set = True
             break
-        # Heuristic check on voice ID for typical female voices (e.g., Zira on Windows)
-        if 'female' in voice.name.lower() or 'zira' in voice.name.lower() or 'hazel' in voice.name.lower():
-            engine.setProperty('voice', voice.id)
-            break
+            
+    # Pass 2: Look for common female names in the voice ID/Name (Zira, Hazel)
+    if not voice_set:
+        for voice in voices:
+            v_name = voice.name.lower()
+            if 'female' in v_name or 'zira' in v_name or 'hazel' in v_name:
+                engine.setProperty('voice', voice.id)
+                voice_set = True
+                break
+                
+    if not voice_set:
+        print("Warning: Could not strictly identify a female voice profile on this system. Using default.")
     
     # Apply configuration settings if they are available
     if config:

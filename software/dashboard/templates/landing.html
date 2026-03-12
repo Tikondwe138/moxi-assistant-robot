@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOXI Initialization</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@500;700&display=swap');
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: #050505;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at center, #1a0010 0%, #000 100%);
+        }
+
+        .container {
+            text-align: center;
+            border: 4px solid #ff007f;
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.4), inset 0 0 20px rgba(255, 0, 127, 0.2);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            color: #ff007f;
+            font-size: 2.5em;
+            text-shadow: 3px 3px 0 #fff;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 1.5em;
+            color: #fff;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .enter-btn {
+            background-color: #ff007f;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 15px 40px;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(255, 0, 127, 0.5);
+        }
+
+        .enter-btn:hover {
+            background-color: #fff;
+            color: #000;
+            border-color: #ff007f;
+            box-shadow: 0 5px 25px rgba(255, 255, 255, 0.8);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>MOXI</h1>
+        <p>System Activated. Awaiting Commander.</p>
+        <a href="/dashboard" class="enter-btn">Initialize Link</a>
+    </div>
+</body>
+
+</html>
