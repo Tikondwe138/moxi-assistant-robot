@@ -75,7 +75,7 @@ class ArmController:
         """Add a gesture sequence to the execution queue."""
         gesture_type = gesture_type.upper()
         # Ensure it's a known command
-        if gesture_type in ["WAVE", "THUMBSUP", "POINT"]:
+        if gesture_type in ["WAVE", "THUMBSUP", "POINT", "GREET", "STOP", "RESET"]:
             self.command_queue.append(f"{gesture_type}\n")
             if logger: logger.info(f"Queued gesture: {gesture_type}")
 

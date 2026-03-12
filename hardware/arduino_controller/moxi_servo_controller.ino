@@ -39,6 +39,15 @@ void loop() {
     } else if (command == "POINT") {
       executePoint();
       Serial.println("DONE");
+    } else if (command == "GREET") {
+      executeGreet();
+      Serial.println("DONE");
+    } else if (command == "STOP") {
+      executeStop();
+      Serial.println("DONE");
+    } else if (command == "RESET") {
+      executeReset();
+      Serial.println("DONE");
     }
   }
 }
@@ -92,5 +101,23 @@ void executePoint() {
   smoothMove(elbowServo, 180); // Fully extend elbow
   smoothMove(wristServo, 90);
   delay(1500); // Hold point
+  moveToNeutral();
+}
+
+void executeGreet() {
+  smoothMove(shoulderServo, 110);
+  smoothMove(elbowServo, 110);
+  smoothMove(wristServo, 45, 10);
+  smoothMove(wristServo, 135, 10);
+  moveToNeutral();
+}
+
+void executeStop() {
+  shoulderServo.write(shoulderServo.read());
+  elbowServo.write(elbowServo.read());
+  wristServo.write(wristServo.read());
+}
+
+void executeReset() {
   moveToNeutral();
 }
