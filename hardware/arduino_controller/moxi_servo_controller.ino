@@ -33,9 +33,6 @@ void loop() {
     if (command == "WAVE") {
       executeWave();
       Serial.println("DONE");
-    } else if (command == "THUMBSUP") {
-      executeThumbsUp();
-      Serial.println("DONE");
     } else if (command == "POINT") {
       executePoint();
       Serial.println("DONE");
@@ -85,14 +82,6 @@ void executeWave() {
     smoothMove(wristServo, 135, 10);
   }
 
-  moveToNeutral();
-}
-
-void executeThumbsUp() {
-  smoothMove(shoulderServo, 120);
-  smoothMove(elbowServo, 45);
-  smoothMove(wristServo, 180);
-  delay(1000); // Hold gesture
   moveToNeutral();
 }
 

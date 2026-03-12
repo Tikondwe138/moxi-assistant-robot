@@ -50,3 +50,6 @@
 2026-03-12 01:47:35,625 - arm_controller - INFO - SIMULATION: Sending command: WAVE
 2026-03-12 01:49:14,985 - main_core - INFO - Executing intent: unknown with entities: []
 2026-03-12 01:56:58,441 - main_core - INFO - Executing intent: unknown with entities: []
+2026-03-12 02:11:03,040 - main_core - INFO - Executing intent: greeting with entities: []
+2026-03-12 02:11:19,926 - arm_controller - INFO - Queued gesture: WAVE
+2026-03-12 02:11:20,003 - arm_controller - INFO - SIMULATION: Sending command: WAVE

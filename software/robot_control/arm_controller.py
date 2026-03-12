@@ -75,14 +75,10 @@ class ArmController:
         """Add a gesture sequence to the execution queue."""
         gesture_type = gesture_type.upper()
         # Ensure it's a known command
-        if gesture_type in ["WAVE", "THUMBSUP", "POINT", "GREET", "STOP", "RESET"]:
+        if gesture_type in ["WAVE", "POINT", "GREET", "STOP", "RESET"]:
             self.command_queue.append(f"{gesture_type}\n")
             if logger: logger.info(f"Queued gesture: {gesture_type}")
 
-    def wave(self):
-        """Backward compatibility for simple waving."""
-        self.queue_gesture("WAVE")
-            
     def close(self):
         """Close the serial connection and stop worker."""
         self.is_running = False
@@ -101,11 +97,6 @@ def get_controller():
     if _controller_instance is None:
         _controller_instance = ArmController()
     return _controller_instance
-
-def wave():
-    """Convenience backward compatible function."""
-    controller = get_controller()
-    controller.wave()
 
 def trigger_gesture(gesture_name: str):
     controller = get_controller()
